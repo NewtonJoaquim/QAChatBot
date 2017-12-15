@@ -34,7 +34,7 @@ controller.setupWebserver(3000, function (err, webserver) {
 //auxiliar variable to control duplicate replies
 let alreadySent = 1;
 
-controller.on('direct_message', function(bot, message){
+controller.on(['direct_message','direct_mention'], function(bot, message){
     let options = {
         mode: 'text',
         pythonPath: 'python',
@@ -44,11 +44,11 @@ controller.on('direct_message', function(bot, message){
     };
     console.log(message.text);
     
-    if(alreadySent == 0){
-        alreadySent = 1;
-        return;
-    }
-    alreadySent = 0;
+    //if(alreadySent == 0){
+    //    alreadySent = 1;
+    //    return;
+    //}
+    //alreadySent = 0;
     python_shell.run('script.py', options, function (err, results) {
         if (err) throw err;
         console.log('results: %j', results[0]);
