@@ -2,7 +2,8 @@ let env = require('node-env-file');
 let filessystem = require('fs');
 let os = require('os');
 let spawn = require('child_process').spawn;
-let python_shell = require('python-shell');
+let request = require('request');
+let json = require('jsonify');
 
 env(__dirname + '/.env');
 
@@ -36,26 +37,27 @@ let alreadySent = 1;
 let command_message = null;
 
 controller.on(['direct_message','direct_mention'], function(bot, message){
-    let options = {
-        mode: 'text',
-        pythonPath: 'python',
-        pythonOptions: ['-u'],
-        scriptPath: '',
-        args: [message.text]
+   
+    let json_text = {
+        'data': [
+            {
+                question: message.text
+            }
+        ]
     };
-    console.log(message.text);
-    command_message = message;
-    //if(alreadySent == 0){
-    //    alreadySent = 1;
-    //    return;
-    //}
-    //alreadySent = 0;
-    python_shell.run('script.py', options, function (err, results) {
-        if (err) throw err;
-        console.log('results: %j', results[0]);
-        
-        bot.reply(message, results[0]);
+
+    let json_object = json.parse(json.stringify(json_text));
+
+    request({
+        url: "http://127.0.0.1:5000/answer",
+        method: "POST",
+        json: true,   // <--Very important!!!
+        body: json_object
+    }, function (error, response, body){
+        console.log(JSON.stringify(body.data[0]['answer']));
+        bot.reply(message, body.data[0]['answer'])
     });
+
     setTimeout(function(){bot.reply(message, feedback_button())}, 2000);
 
 })
@@ -200,5 +202,27 @@ function response1_feedback(){
             }
         ]
     }
+    return responseB;
+}
+
+function add_question_button(){
+    const messageB = {
+        "replace_original": true,
+        "attachments": [
+            {
+                "callback_id": "button_add_question",
+                "color": "#3AA3E3",
+                "attachment_type": "default",
+                "actions": [
+                    {
+                        "name": "button_click_add_question",
+                        "text": "Adicionar Pergunta",
+                        "type": "button",
+                        "value": "yes"
+                    }
+                ]
+            }
+        ]
+    };
     return responseB;
 }
