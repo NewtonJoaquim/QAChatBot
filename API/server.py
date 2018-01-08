@@ -20,9 +20,17 @@ def initialize_model():
     with open(vocab_filename ,'rb') as f:
         loaded_model_vocab = joblib.load(f) 
 
-    return loaded_model, loaded_model_vocab
+    context_filename = PATH + '\modelQA_context.pkl'
+    with open(context_filename ,'rb') as f:
+        loaded_model_context = joblib.load(f) 
 
-model, vocab = initialize_model()
+    context_vocab_filename = PATH + '\modelQA_context_vocabulary.pkl'
+    with open(context_vocab_filename ,'rb') as f:
+        loaded_model_vocab_context = joblib.load(f)
+
+    return loaded_model, loaded_model_vocab, loaded_model_context, loaded_model_vocab_context
+
+model, vocab, model_c, vocab_c = initialize_model()
 
 @app.route("/answer", methods=['POST'])
 def predict_answer():
@@ -39,6 +47,25 @@ def predict_answer():
     predictions = model.predict(teste_predict_vect)
  
     pred_prob_list = model.predict_proba(teste_predict_vect).tolist()
+
+    output_json = json_concatenation(req_data,'data', predictions.tolist())
+
+    return output_json
+
+@app.route("/context", methods=['POST'])
+def predict_context():
+    vectorizer_train = CountVectorizer(vocabulary=vocab_c)
+    req_data = request.get_json()
+    teste_predict = []
+    req_array = req_data['data']
+    for i in range(len(req_array)):
+        desc = req_array[i]['question']
+        teste_predict.append(desc)
+
+    teste_predict_vect = vectorizer_train.transform(teste_predict) 
+    predictions = model_c.predict(teste_predict_vect)
+ 
+    pred_prob_list = model_c.predict_proba(teste_predict_vect).tolist()
 
     output_json = json_concatenation(req_data,'data', predictions.tolist())
 

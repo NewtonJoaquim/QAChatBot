@@ -1,19 +1,25 @@
-pergunta|resposta
-quem foi D. Pedro I?|D. Pedro I foi o primeiro imperador do Brasil.
-Me fale sobre D. Pedro I|D. Pedro I foi o primeiro imperador do Brasil.
-quem declarou a independencia do Brasil?|D. Pedro I
-Por que a familia real portuguesa veio para o Brasil?|Para fugir do ataque de Napoleão
-Por que D. Pedro i declarou independencia?|Para parar de atender ás demandas da coroa portuguesa 
-Onde ocorreu a proclamacao da independencia?|Nas margens do Rio Ipiranga
-Onde foi proclamada a independencia?|Nas margens do Rio Ipiranga
-O que ocorreu depois que D. Pedro I retornou a Portugal?|Iniciou-se o Periodo Regencial
-Quem protegeu a familia real durante a fuga para o Brasil?|A marinha inglesa
-Quem eram os pais de D. Pedro I?|D. Joao Vi e D. Carlota Joaquina
-Oque propiciou a disseminação de ideias sobre independencia?|A liberdade de imprensa conquistada com a vinda da familia real
-Onde nasceu D. Pedro I?|Em Portugal, em 12 de Outubro de 1798
-Qual era o contexto politico da epoca?|Fim no absolutismo e inicio do liberalismo politico
-O que era o Bloqueio Continental?|Um decreto de Napoleao, que impedia paises da Europa continental de negociarem com a Inglaterra
-O que dizia a primeira constituicao brasileira?|estipulava que o pais era uma monarquia hereditaria, a religiao oficial era a catolica, o voto era censitario, ou seja, somente uma elite financeira poderia votar e o principal poder seria o Moderador, exercido pelo monarca.
-O que foi a Confederacao do Equador?|Movimento separatista de Pernambuco, criado devido a crescente impopularidade de D Pedro
-quando ocorreou a proclamação da independência do Brasil?|A independência foi proclamada em 7 de setembro de 1922 as margem do riacho Ipiranga
-em que data foi proclamada da independência do Brasil?|A independência foi proclamada em 7 de setembro de 1922 as margem do riacho Ipiranga
+pergunta|resposta|contexto
+quem foi D. Pedro I?|D. Pedro I foi o primeiro imperador do Brasil.|Primeiro Reinado
+Me fale sobre D. Pedro I|D. Pedro I foi o primeiro imperador do Brasil.|Primeiro Reinado
+quem declarou a independencia do Brasil?|D. Pedro I|Primeiro Reinado
+Por que a familia real portuguesa veio para o Brasil?|Para fugir do ataque de Napoleão|Vinda da Familia Real
+Por que D. Pedro i declarou independencia?|Para parar de atender ás demandas da coroa portuguesa|Independencia 
+Onde ocorreu a proclamacao da independencia?|Nas margens do Rio Ipiranga|Independencia
+Onde foi proclamada a independencia?|Nas margens do Rio Ipiranga|Independencia
+O que ocorreu depois que D. Pedro I retornou a Portugal?|Iniciou-se o Periodo Regencial|Periodo Regencial
+Quem protegeu a familia real durante a fuga para o Brasil?|A marinha inglesa|Vinda da Familia Real
+Quem eram os pais de D. Pedro I?|D. Joao Vi e D. Carlota Joaquina|Vinda da Familia Real
+Oque propiciou a disseminação de ideias sobre independencia?|A liberdade de imprensa conquistada com a vinda da familia real|Independencia
+Onde nasceu D. Pedro I?|Em Portugal, em 12 de Outubro de 1798|Primeiro Reinado
+Qual era o contexto politico da epoca?|Fim do absolutismo e inicio do liberalismo politico|Independencia
+O que era o Bloqueio Continental?|Um decreto de Napoleao, que impedia paises da Europa continental de negociarem com a Inglaterra|Vinda da Familia Real
+O que dizia a primeira constituicao brasileira?|estipulava que o pais era uma monarquia hereditaria, a religiao oficial era a catolica, o voto era censitario, ou seja, somente uma elite financeira poderia votar e o principal poder seria o Moderador, exercido pelo monarca.|Primeiro Reinado
+O que foi a Confederacao do Equador?|Movimento separatista de Pernambuco, criado devido a crescente impopularidade de D Pedro|Primeiro Reinado
+quando ocorreou a proclamação da independência do Brasil?|A independência foi proclamada em 7 de setembro de 1922 as margem do riacho Ipiranga|Independencia
+em que data foi proclamada da independência do Brasil?|A independência foi proclamada em 7 de setembro de 1922 as margem do riacho Ipiranga|Independencia
+Me de mais informacoes|Ok, um momento.|Obter Detalhes
+Quero mais informacoes|Ok, um momento.|Obter Detalhes
+Me de mais detalhes|Ok, um momento.|Obter Detalhes
+Quero mais detalhes|Ok, um momento.|Obter Detalhes
+Fale-me mais|Ok, um momento.|Obter Detalhes
+Conte-me mais|Ok, um momento.|Obter Detalhes

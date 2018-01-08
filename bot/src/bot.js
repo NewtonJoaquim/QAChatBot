@@ -36,6 +36,9 @@ controller.setupWebserver(3000, function (err, webserver) {
 let alreadySent = 1;
 let command_message = null;
 
+//context variable
+var context = "";
+
 controller.on(['direct_message','direct_mention'], function(bot, message){
    
     let json_text = {
@@ -58,9 +61,25 @@ controller.on(['direct_message','direct_mention'], function(bot, message){
         bot.reply(message, body.data[0]['answer'])
     });
 
+    request({
+        url: "http://127.0.0.1:5000/context",
+        method: "POST",
+        json: true,   // <--Very important!!!
+        body: json_object
+    }, function (error, response, body){
+        console.log(JSON.stringify(body.data[0]['answer']));
+        //context = body.data[0]['answer'];
+        setContext(body.data[0]['answer']);
+        callback();
+    });
+    console.log("Contexto: " + context);
     setTimeout(function(){bot.reply(message, feedback_button())}, 2000);
 
 })
+
+function callback(){
+    console.log("Contexto: " + context);
+}
 
 controller.on('interactive_message_callback', function(bot, message){
     let dir = __dirname + '/feedback/' ;
@@ -205,24 +224,12 @@ function response1_feedback(){
     return responseB;
 }
 
-function add_question_button(){
-    const messageB = {
-        "replace_original": true,
-        "attachments": [
-            {
-                "callback_id": "button_add_question",
-                "color": "#3AA3E3",
-                "attachment_type": "default",
-                "actions": [
-                    {
-                        "name": "button_click_add_question",
-                        "text": "Adicionar Pergunta",
-                        "type": "button",
-                        "value": "yes"
-                    }
-                ]
-            }
-        ]
-    };
-    return responseB;
+function setContext(newContext){
+    if(newContext == "Obter Detalhes"){
+        getDetails(context);
+    }
+    else
+        context = newContext;
 }
+
+function getDetails(){}

@@ -27,8 +27,8 @@ df
 
 
 y = df.resposta
+y2 = df.contexto
 X = df.pergunta
-
 
 # In[4]:
 
@@ -42,6 +42,9 @@ X = vectorizer_train.fit_transform(X)
 
 model = MultinomialNB()
 model.fit(X,y)
+
+model_context = MultinomialNB()
+model_context.fit(X, y2)
 
 teste_predict_vect = vectorizer_train.transform(['por que independencia'])
 model.predict(teste_predict_vect)
@@ -64,3 +67,14 @@ with open (filename, 'wb') as file:
     
 file.close()
 
+filename = 'modelQA_context.pkl'
+with open (filename, 'wb') as file:
+    joblib.dump(model_context, file)
+    
+file.close()
+
+filename = 'modelQA_context_vocabulary.pkl'
+with open (filename, 'wb') as file:
+    joblib.dump(vectorizer_train.vocabulary_, file)
+    
+file.close()
