@@ -3,7 +3,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.externals import joblib
 from flask_cors import CORS
-import os, json, re 
+import os, json, re, time 
 import pandas as pd
 
 app = Flask(__name__)
@@ -35,6 +35,7 @@ model, vocab, model_c, vocab_c = initialize_model()
 @app.route("/answer", methods=['POST'])
 def predict_answer():
 
+    start_time = time.time()
     vectorizer_train = CountVectorizer(vocabulary=vocab)
     req_data = request.get_json()
     teste_predict = []
@@ -47,13 +48,16 @@ def predict_answer():
     predictions = model.predict(teste_predict_vect)
  
     pred_prob_list = model.predict_proba(teste_predict_vect).tolist()
-
+    print("answer time: " + str(time.time() - start_time))
+    print("answer probability:" + str(get_greatest_probabilities(pred_prob_list)))
     output_json = json_concatenation(req_data,'data', predictions.tolist())
 
     return output_json
 
 @app.route("/context", methods=['POST'])
 def predict_context():
+
+    start_time = time.time()
     vectorizer_train = CountVectorizer(vocabulary=vocab_c)
     req_data = request.get_json()
     teste_predict = []
@@ -66,7 +70,8 @@ def predict_context():
     predictions = model_c.predict(teste_predict_vect)
  
     pred_prob_list = model_c.predict_proba(teste_predict_vect).tolist()
-
+    print("context time: " + str(time.time() - start_time))
+    print("context probability:" + str(get_greatest_probabilities(pred_prob_list)))
     output_json = json_concatenation(req_data,'data', predictions.tolist())
 
     return output_json
@@ -82,5 +87,11 @@ def json_concatenation(input_json, json_key, predictions_list):
             
     output_json = {"data" : output_dict}
     return jsonify(output_json)
+
+def get_greatest_probabilities(pred_prob_list):
+    max_probabilities = []
+    for i in pred_prob_list:
+       max_probabilities.append(max(i))
+    return max_probabilities
 
 app.run()

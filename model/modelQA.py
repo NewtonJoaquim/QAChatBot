@@ -33,7 +33,7 @@ X = df.pergunta
 # In[4]:
 
 
-vectorizer_train = CountVectorizer()
+vectorizer_train = CountVectorizer(ngram_range=(1, 10))
 X = vectorizer_train.fit_transform(X)
 
 
